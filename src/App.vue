@@ -1,32 +1,51 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import axios from 'axios';
+export default {
+  components: {
+    
+  },
+  data() {
+    return {
+      
     }
+  },
+  async created() {
+    this.$store.state.user = 'star';
+    const response = await axios.get('user');
+    
+    this.$store.dispatch('user', response.data);
+    // this.user = response.data;
+    // alert(this.user)
   }
 }
+</script>
+
+<style lang="scss">
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.entrance {
+      width: 100%;
+      margin: 0 auto;
+      /* border: 1px solid red; */
+  }
+.btn {
+      background-color: #0085B2;
+      color: white;
+
+      &:hover {
+        color: white;
+        background-color: #0097b2;
+      }
+  }
 </style>

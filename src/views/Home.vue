@@ -1,18 +1,43 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div>
+        <Navbar :home="'Home'" :links="links"/>
+        <div class="entrance">
+            <Entrance />
+        </div>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Navbar from "@/components/Navbar"
+import Entrance from "@/components/Entrance"
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    props: {
+        user: {
+            type: String,
+            default: null
+        }
+    },
+    components: {
+        Navbar,
+        Entrance
+    },
+    data() {
+        return {
+            links: [
+                { name: 'Login', dir: 'Login'},
+            ],
+        } 
+    },
+    created() {
+        if(!this.$store.state.user) {
+            this.$router.push({name: 'Login'});
+        }
+        
+    }
+
 }
 </script>
+
+<style scoped>
+    
+</style>
